@@ -1,7 +1,8 @@
+
+
 WITH user_sessions AS (
   SELECT
     DATE(TIMESTAMP_MICROS(event_timestamp)) AS event_date,
-    -- dodanie CONCAT(CAST(user_pseudo_id AS string), CAST(event_bundle_sequence_id AS string)) AS session_id, w jakiś sposób psuje agregacje. 
     (select value.int_value from unnest(event_params) where key = 'ga_session_id' ) as session_id,
     user_pseudo_id,
     traffic_source.source AS source,
